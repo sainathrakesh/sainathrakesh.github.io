@@ -349,8 +349,8 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
         const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
         
         // Logic: Look for repo image, fallback to our robot sign language image
-        const projectImage = `./images/${repo.name}.jpg`; 
-        const fallbackImage = `./images/robot-sign-language.jpg`;
+        const projectImage = `./images/${repo.name}.png`; 
+        const fallbackImage = `./images/robot-sign-language.png`;
     
         container.innerHTML += `
             <div class="card">
