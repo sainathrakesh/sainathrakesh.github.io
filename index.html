@@ -212,7 +212,7 @@
         const container = document.getElementById("repos");
         data.filter(r => !r.fork).slice(0, 6).forEach((repo, index) => {
             // Using placeholder images - replace these URLs with your actual project screenshots
-            const imageUrl = `https://picsum.photos/seed/${repo.id}/400/250`; 
+            const imageUrl = `const imageUrl = ./images/${repo.name}.png;`; 
             
             container.innerHTML += `
                 <div class="card">
