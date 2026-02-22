@@ -324,23 +324,21 @@
         <p style="margin-bottom: 20px;">
             <span id="email-text" 
                   onclick="copyEmail()" 
-                  style="color: var(--primary-color); font-weight: bold; cursor: pointer; border-bottom: 1px dashed var(--primary-color); position: relative;" 
-                  title="Click to copy email">
+                  style="color: var(--primary-color); cursor: pointer; position: relative;" 
+                  title="Click to copy">
                 nsainathrakesh@gmail.com
-                <span id="copy-toast" style="visibility: hidden; width: 100px; background-color: #38bdf8; color: #0f172a; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -50px; opacity: 0; transition: opacity 0.3s; font-size: 0.7rem;">
-                    Copied!
+                <span id="copy-toast" style="visibility: hidden; background-color: rgba(56, 189, 248, 0.9); color: #0f172a; text-align: center; border-radius: 4px; padding: 2px 8px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.7rem; white-space: nowrap;">
+                    Copied to clipboard
                 </span>
             </span>
         </p>
     
-        <p style="margin-bottom: 20px;">
-            <a href="tel:+491736586703" style="text-decoration: none; color: white; opacity: 0.9;">
-                 +49 1736586703
-            </a>
+        <p style="margin-bottom: 20px; opacity: 0.9;">
+            +49 173 6586703
         </p>
     
         <p>
-            <a href="https://www.linkedin.com/in/sainath-rakesh/" target="_blank" class="btn" style="text-decoration: none; display: inline-block; padding: 10px 25px;">
+            <a href="https://www.linkedin.com/in/sainath-rakesh/" target="_blank" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem;">
                 LinkedIn Profile
             </a>
         </p>
@@ -352,17 +350,13 @@
         const toast = document.getElementById("copy-toast");
     
         navigator.clipboard.writeText(email).then(() => {
-            // Show "Copied!" message
             toast.style.visibility = "visible";
             toast.style.opacity = "1";
     
-            // Hide it after 2 seconds
             setTimeout(() => {
                 toast.style.opacity = "0";
                 toast.style.visibility = "hidden";
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
+            }, 1500);
         });
     }
     </script>
