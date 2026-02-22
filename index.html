@@ -6,7 +6,6 @@
 <title>Sainath Rakesh N | Robotics Engineer</title>
 
 <style>
-/* Reset and font */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -14,19 +13,19 @@ body {
     overflow-x: hidden;
 }
 
-/* Parallax background */
+/* Parallax background that fits width and scrolls up slowly */
 .parallax-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('background.png') center top / cover no-repeat;
+    background: url('background.png') top center / 100% auto no-repeat;
     z-index: -2;
-    will-change: transform; /* improves performance */
+    will-change: transform;
 }
 
-/* Dark overlay to make text readable */
+/* Overlay for readability */
 .overlay {
     position: fixed;
     width: 100%;
@@ -146,7 +145,6 @@ footer {
 <section id="projects">
     <h1>Projects</h1>
 
-    <!-- Manually curated projects -->
     <div class="card">
         <h3>Humanoid Sign Language Recognition</h3>
         <p>Transformer-based real-time sign language recognition system integrated with a humanoid robot.</p>
@@ -164,11 +162,6 @@ footer {
         <p>Human-like robotic hand model built and simulated in ROS2.</p>
         <a href="#">Project Documentation</a>
     </div>
-
-    <!-- Optional GitHub auto-fetch -->
-    <!--
-    <div id="repos"></div>
-    -->
 </section>
 
 <!-- Contact Section -->
@@ -183,37 +176,19 @@ footer {
     © 2026 Sainath Rakesh N | Built with GitHub Pages
 </footer>
 
-<!-- Scripts -->
 <script>
 /* Smooth scrolling */
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({behavior: "smooth"});
 }
 
-/* Parallax scroll effect: background moves slower than content */
+/* Parallax effect: move background slower than content */
 window.addEventListener("scroll", function() {
     const scrollY = window.scrollY;
+    // Move UP as page scrolls down
     document.querySelector(".parallax-bg").style.transform =
-        "translateY(" + scrollY * 0.4 + "px)";
+        "translateY(" + (scrollY * -0.4) + "px)";
 });
-
-/* Optional GitHub repo fetch (disable if using manual projects) */
-/*
-fetch("https://api.github.com/users/nsainathrakesh/repos")
-.then(res => res.json())
-.then(data => {
-  const container = document.getElementById("repos");
-  data.slice(0,5).forEach(repo => {
-    container.innerHTML += `
-      <div class="card">
-        <h3>${repo.name}</h3>
-        <p>${repo.description || "No description provided."}</p>
-        <a href="${repo.html_url}" target="_blank">View Repository</a>
-      </div>
-    `;
-  });
-});
-*/
 </script>
 
 </body>
