@@ -6,101 +6,118 @@
 <title>Sainath Rakesh N | Robotics Engineer</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: white;
-        background: url('background.png') top center repeat-y;
-        background-size: 100% auto; /* Fit width, height adjusts automatically */
-        background-attachment: scroll; /* Normal scroll */
-        overflow-x: hidden;
-    }
+/* Reset and font */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
 
-    /* Dark overlay */
-    .overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
+/* Parallax background */
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background.png') center top / cover no-repeat;
+    z-index: -2;
+    will-change: transform; /* improves performance */
+}
 
-    nav {
-        position: fixed;
-        width: 100%;
-        background: rgba(17, 24, 39, 0.9);
-        padding: 15px;
-        text-align: center;
-        z-index: 1000;
-        backdrop-filter: blur(6px);
-    }
+/* Dark overlay to make text readable */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 
-    nav a {
-        color: #38bdf8;
-        margin: 0 15px;
-        text-decoration: none;
-        font-weight: bold;
-    }
+/* Navbar */
+nav {
+    position: fixed;
+    width: 100%;
+    background: rgba(17, 24, 39, 0.9);
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
 
-    section {
-        min-height: 100vh;
-        padding: 120px 20px 60px;
-        text-align: center;
-    }
+nav a {
+    color: #38bdf8;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
+/* Sections */
+section {
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    text-align: center;
+}
 
-    .btn {
-        padding: 12px 25px;
-        background: #38bdf8;
-        border: none;
-        color: black;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 20px;
-        border-radius: 6px;
-    }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
 
-    .card {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        transition: transform 0.3s ease;
-    }
+/* Buttons */
+.btn {
+    padding: 12px 25px;
+    background: #38bdf8;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 6px;
+}
 
-    .card:hover {
-        transform: scale(1.05);
-    }
+/* Project cards */
+.card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease;
+}
 
-    .card a {
-        color: #38bdf8;
-        text-decoration: none;
-        font-weight: bold;
-    }
+.card:hover {
+    transform: scale(1.05);
+}
 
-    footer {
-        background: rgba(17, 24, 39, 0.9);
-        padding: 20px;
-        text-align: center;
-        backdrop-filter: blur(6px);
-    }
+.card a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: bold;
+}
 
+/* Footer */
+footer {
+    background: rgba(17, 24, 39, 0.9);
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
 </style>
 </head>
 
 <body>
 
+<!-- Background layers -->
+<div class="parallax-bg"></div>
 <div class="overlay"></div>
 
+<!-- Navigation -->
 <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -108,43 +125,81 @@
     <a href="#contact">Contact</a>
 </nav>
 
+<!-- Home Section -->
 <section id="home">
     <h1>Hi, I'm Sainath Rakesh</h1>
     <p>Robotics | AI | Autonomous Systems | Human Robot Interaction</p>
     <button class="btn" onclick="scrollToSection('projects')">My Work</button>
 </section>
 
+<!-- About Section -->
 <section id="about">
     <h1>About Me</h1>
     <p>
-        Master's student in Elektromobilität based in Germany.
-        Passionate about robotics, computer vision, and intelligent systems.
+        Master's student in Elektromobilität based in Germany.<br>
+        Passionate about robotics, computer vision, and intelligent systems.<br>
         I build systems where mechanics meets AI.
     </p>
 </section>
 
+<!-- Projects Section -->
 <section id="projects">
     <h1>Projects</h1>
+
+    <!-- Manually curated projects -->
+    <div class="card">
+        <h3>Humanoid Sign Language Recognition</h3>
+        <p>Transformer-based real-time sign language recognition system integrated with a humanoid robot.</p>
+        <a href="https://github.com/nsainathrakesh/your-repo-name" target="_blank">View Code</a>
+    </div>
+
+    <div class="card">
+        <h3>SLAM Mapping Robot</h3>
+        <p>ROS2 + LiDAR based autonomous mapping robot simulated in Gazebo.</p>
+        <a href="#">Project Details</a>
+    </div>
+
+    <div class="card">
+        <h3>Robotic Hand Kinematics</h3>
+        <p>Human-like robotic hand model built and simulated in ROS2.</p>
+        <a href="#">Project Documentation</a>
+    </div>
+
+    <!-- Optional GitHub auto-fetch -->
+    <!--
     <div id="repos"></div>
+    -->
 </section>
 
+<!-- Contact Section -->
 <section id="contact">
     <h1>Contact</h1>
     <p>Email: nsainathrakesh@gmail.com</p>
     <p>Phone: +49 1736586703</p>
 </section>
 
+<!-- Footer -->
 <footer>
     © 2026 Sainath Rakesh N | Built with GitHub Pages
 </footer>
 
+<!-- Scripts -->
 <script>
+/* Smooth scrolling */
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({behavior: "smooth"});
 }
 
-/* GitHub repo auto-fetch */
-fetch("https://api.github.com/users/sainathrakesh/repos")
+/* Parallax scroll effect: background moves slower than content */
+window.addEventListener("scroll", function() {
+    const scrollY = window.scrollY;
+    document.querySelector(".parallax-bg").style.transform =
+        "translateY(" + scrollY * 0.4 + "px)";
+});
+
+/* Optional GitHub repo fetch (disable if using manual projects) */
+/*
+fetch("https://api.github.com/users/nsainathrakesh/repos")
 .then(res => res.json())
 .then(data => {
   const container = document.getElementById("repos");
@@ -158,6 +213,7 @@ fetch("https://api.github.com/users/sainathrakesh/repos")
     `;
   });
 });
+*/
 </script>
 
 </body>
