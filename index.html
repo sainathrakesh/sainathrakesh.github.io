@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Parallax background that fits width and scrolls up slowly */
+/* Parallax background that scrolls slower than content */
 .parallax-bg {
     position: fixed;
     top: 0;
@@ -25,7 +25,7 @@ body {
     will-change: transform;
 }
 
-/* Overlay for readability */
+/* Dark overlay */
 .overlay {
     position: fixed;
     width: 100%;
@@ -144,24 +144,7 @@ footer {
 <!-- Projects Section -->
 <section id="projects">
     <h1>Projects</h1>
-
-    <div class="card">
-        <h3>Humanoid Sign Language Recognition</h3>
-        <p>Transformer-based real-time sign language recognition system integrated with a humanoid robot.</p>
-        <a href="https://github.com/nsainathrakesh/your-repo-name" target="_blank">View Code</a>
-    </div>
-
-    <div class="card">
-        <h3>SLAM Mapping Robot</h3>
-        <p>ROS2 + LiDAR based autonomous mapping robot simulated in Gazebo.</p>
-        <a href="#">Project Details</a>
-    </div>
-
-    <div class="card">
-        <h3>Robotic Hand Kinematics</h3>
-        <p>Human-like robotic hand model built and simulated in ROS2.</p>
-        <a href="#">Project Documentation</a>
-    </div>
+    <div id="repos"></div>
 </section>
 
 <!-- Contact Section -->
@@ -182,12 +165,42 @@ function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({behavior: "smooth"});
 }
 
-/* Parallax effect: move background slower than content */
+/* Parallax effect: background moves slower than content */
 window.addEventListener("scroll", function() {
     const scrollY = window.scrollY;
-    // Move UP as page scrolls down
     document.querySelector(".parallax-bg").style.transform =
         "translateY(" + (scrollY * -0.4) + "px)";
+});
+
+/* GitHub repo auto-fetch */
+fetch("https://api.github.com/users/nsainathrakesh/repos")
+.then(response => {
+    if (!response.ok) throw new Error("GitHub API error");
+    return response.json();
+})
+.then(data => {
+    const container = document.getElementById("repos");
+    if (data.length === 0) {
+        container.innerHTML = "<p>No public repositories found.</p>";
+        return;
+    }
+    // Optional: filter forks or specific repos
+    data
+    //.filter(repo => !repo.fork) // uncomment to exclude forks
+    .slice(0,5) // show top 5 repos
+    .forEach(repo => {
+        container.innerHTML += `
+            <div class="card">
+                <h3>${repo.name}</h3>
+                <p>${repo.description || "No description provided."}</p>
+                <a href="${repo.html_url}" target="_blank">View Repository</a>
+            </div>
+        `;
+    });
+})
+.catch(error => {
+    document.getElementById("repos").innerHTML = "<p>Unable to load repositories.</p>";
+    console.error(error);
 });
 </script>
 
