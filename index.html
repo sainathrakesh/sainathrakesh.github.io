@@ -40,6 +40,21 @@
         font-size: 3rem;
     }
 
+    .content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .parallax {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120%;
+        background: url('background.png') center center / cover no-repeat;
+        z-index: -1;
+    }
+    
     .btn {
         padding: 12px 25px;
         background: #38bdf8;
@@ -79,81 +94,90 @@
 </head>
 
 <body>
-<div class="overlay"></div>
-<nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-</nav>
-
-<section id="home">
-    <h1>Hi, I'm Sainath Rakesh</h1>
-    <p>Robotics | AI | Autonomous Systems | Human Robot Interaction</p>
-    <button class="btn" onclick="scrollToSection('projects')">My Work</button>
-</section>
-
-<section id="about">
-    <h1>About Me</h1>
-    <div class="skill">
-      <p>ROS2</p>
-      <div class="bar"><div class="progress" style="width:90%"></div></div>
-    </div>
-    <p>
-        Master's student in Elektromobilität based in Germany.
-        Passionate about robotics, computer vision, and intelligent systems.
-        I build systems where mechanics meets AI.
-    </p>
-</section>
-
-<section id="projects">
-    <h1>Projects</h1>
-
-   <div id="repos"></div>
-
+<div class="content">
+    <div class="overlay"></div>
+    <div class="parallax"></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <section id="home">
+        <h1>Hi, I'm Sainath Rakesh</h1>
+        <p>Robotics | AI | Autonomous Systems | Human Robot Interaction</p>
+        <button class="btn" onclick="scrollToSection('projects')">My Work</button>
+    </section>
+    
+    <section id="about">
+        <h1>About Me</h1>
+        <div class="skill">
+          <p>ROS2</p>
+          <div class="bar"><div class="progress" style="width:90%"></div></div>
+        </div>
+        <p>
+            Master's student in Elektromobilität based in Germany.
+            Passionate about robotics, computer vision, and intelligent systems.
+            I build systems where mechanics meets AI.
+        </p>
+    </section>
+    
+    <section id="projects">
+        <h1>Projects</h1>
+    
+       <div id="repos"></div>
+    
+        <script>
+        fetch("https://api.github.com/users/YOURUSERNAME/repos")
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("repos");
+          data.slice(0,5).forEach(repo => {
+            container.innerHTML += `
+              <div class="card">
+                <h3>${repo.name}</h3>
+                <p>${repo.description || "No description"}</p>
+                <a href="${repo.html_url}" target="_blank">View Repo</a>
+              </div>
+            `;
+          });
+        });
+        </script>
+    </section>
+    
+    <section id="contact">
+        <h1>Contact</h1>
+        <p>Email: nsainathrakesh@gmail.com</p>
+        <p>Phone: +49 1736586703</p>
+    </section>
+    
+    <footer>
+        © 2026 Sainath Rakesh N | Built with GitHub Pages
+    </footer>
+    
     <script>
-    fetch("https://api.github.com/users/YOURUSERNAME/repos")
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById("repos");
-      data.slice(0,5).forEach(repo => {
-        container.innerHTML += `
-          <div class="card">
-            <h3>${repo.name}</h3>
-            <p>${repo.description || "No description"}</p>
-            <a href="${repo.html_url}" target="_blank">View Repo</a>
-          </div>
-        `;
-      });
-    });
-    </script>
-</section>
-
-<section id="contact">
-    <h1>Contact</h1>
-    <p>Email: nsainathrakesh@gmail.com</p>
-    <p>Phone: +49 1736586703</p>
-</section>
-
-<footer>
-    © 2026 Sainath Rakesh N | Built with GitHub Pages
-</footer>
-
-<script>
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({behavior: "smooth"});
-}
-
-function toggleTheme() {
-    if (document.body.style.background === "white") {
-        document.body.style.background = "#0f172a";
-        document.body.style.color = "white";
-    } else {
-        document.body.style.background = "white";
-        document.body.style.color = "black";
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({behavior: "smooth"});
     }
-}
+    
+    function toggleTheme() {
+        if (document.body.style.background === "white") {
+            document.body.style.background = "#0f172a";
+            document.body.style.color = "white";
+        } else {
+            document.body.style.background = "white";
+            document.body.style.color = "black";
+        }
+    }
+    </script>
+</div>
+<script>
+window.addEventListener("scroll", function() {
+    const scrollY = window.scrollY;
+    document.querySelector(".parallax").style.transform =
+        "translateY(" + scrollY * 0.4 + "px)";
+});
 </script>
-
 </body>
 </html>
