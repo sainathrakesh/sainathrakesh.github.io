@@ -320,11 +320,52 @@
 <section id="contact">
     <h1>Contact</h1>
     <p>Let's build the future of robotics together.</p>
-    <div class="card" style="text-align: center;">
-        <p><a href="mailto:nsainathrakesh@gmail.com">Email Address</a></p>
-        <p>+49 1736586703</p>
-        <p><a href="https://www.linkedin.com/in/sainath-rakesh/"> LinkedIn Profile</a></p>
+    <div class="card" style="text-align: center; max-width: 400px; padding: 30px;">
+        <p style="margin-bottom: 20px;">
+            <span id="email-text" 
+                  onclick="copyEmail()" 
+                  style="color: var(--primary-color); font-weight: bold; cursor: pointer; border-bottom: 1px dashed var(--primary-color); position: relative;" 
+                  title="Click to copy email">
+                nsainathrakesh@gmail.com
+                <span id="copy-toast" style="visibility: hidden; width: 100px; background-color: #38bdf8; color: #0f172a; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -50px; opacity: 0; transition: opacity 0.3s; font-size: 0.7rem;">
+                    Copied!
+                </span>
+            </span>
+        </p>
+    
+        <p style="margin-bottom: 20px;">
+            <a href="tel:+491736586703" style="text-decoration: none; color: white; opacity: 0.9;">
+                 +49 1736586703
+            </a>
+        </p>
+    
+        <p>
+            <a href="https://www.linkedin.com/in/sainath-rakesh/" target="_blank" class="btn" style="text-decoration: none; display: inline-block; padding: 10px 25px;">
+                LinkedIn Profile
+            </a>
+        </p>
     </div>
+    
+    <script>
+    function copyEmail() {
+        const email = "nsainathrakesh@gmail.com";
+        const toast = document.getElementById("copy-toast");
+    
+        navigator.clipboard.writeText(email).then(() => {
+            // Show "Copied!" message
+            toast.style.visibility = "visible";
+            toast.style.opacity = "1";
+    
+            // Hide it after 2 seconds
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.visibility = "hidden";
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+    </script>
 </section>
 
 <footer>
