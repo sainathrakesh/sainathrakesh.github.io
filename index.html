@@ -340,10 +340,10 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
         const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
         
         // 1. Define the path to your specific repo image
-        const projectImage = `./images/${repo.name}.jpg`; 
+        const projectImage = `./images/${repo.name}.png`; 
         
         // 2. Define the path to the Robotic Hand image you just created
-        const fallbackImage = `./images/robot-sign-language.jpg`;
+        const fallbackImage = `./images/placeholder.png`;
     
         container.innerHTML += `
             <div class="card">
