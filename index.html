@@ -309,6 +309,40 @@
         color: #94a3b8;
         margin-bottom: 10px;
     }
+
+    /* Update the line to the center for desktop */
+    @media (min-width: 768px) {
+        .timeline::after {
+            left: 50%;
+        }
+        
+        .timeline-item {
+            width: 45%; /* Take up slightly less than half */
+            margin-bottom: 0;
+        }
+    
+        /* Items on the left */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+    
+        /* Items on the right */
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            text-align: left; 
+        }
+    
+        /* Adjust dots to center */
+        .timeline-item:nth-child(odd)::after {
+            right: -59px; /* Adjust based on your padding */
+            left: auto;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -49px;
+        }
+    }
     
 </style>
 </head>
@@ -387,7 +421,7 @@
     <div class="timeline">
         <div class="timeline-item">
             <div class="timeline-content">
-                <span class="timeline-date">April 2023 - Present</span>
+                <span class="timeline-date">April 2023 - March 2026</span>
                 <h3 class="timeline-title">M.Sc. Elektromobilität-ACES</h3>
                 <div class="timeline-location">Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany</div>
                 <p>Focusing on AI & Autonomous Driving, Connectivity, E-Powertrain, Sustainable Mobility & Production Technology (ACES).</p>
