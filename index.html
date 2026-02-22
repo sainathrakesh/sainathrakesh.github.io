@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name | Robotics Engineer</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+        scroll-behavior: smooth;
+    }
+
+    nav {
+        position: fixed;
+        width: 100%;
+        background: #111827;
+        padding: 15px;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    nav a {
+        color: #38bdf8;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    section {
+        min-height: 100vh;
+        padding: 100px 20px 50px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        background: #38bdf8;
+        border: none;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+
+    .card {
+        background: #1e293b;
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 600px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    footer {
+        background: #111827;
+        padding: 20px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section id="home">
+    <h1>Hi, I'm Your Name 👋</h1>
+    <p>Robotics | AI | Autonomous Systems</p>
+    <button class="btn" onclick="scrollToSection('projects')">View My Work</button>
+</section>
+
+<section id="about">
+    <h1>About Me</h1>
+    <p>
+        Master's student in Elektromobilität based in Germany.
+        Passionate about robotics, computer vision, and intelligent systems.
+        I build systems where mechanics meets AI.
+    </p>
+</section>
+
+<section id="projects">
+    <h1>Projects</h1>
+
+    <div class="card">
+        <h3>Humanoid Sign Language Recognition</h3>
+        <p>Transformer-based system for real-time sign language understanding.</p>
+    </div>
+
+    <div class="card">
+        <h3>SLAM Mapping Robot</h3>
+        <p>Autonomous LiDAR mapping robot using ROS2 and Gazebo.</p>
+    </div>
+
+    <div class="card">
+        <h3>Robotic Hand</h3>
+        <p>Human-like kinematic robotic hand simulation in ROS2.</p>
+    </div>
+</section>
+
+<section id="contact">
+    <h1>Contact</h1>
+    <p>Email: your.email@example.com</p>
+    <button class="btn" onclick="toggleTheme()">Toggle Theme</button>
+</section>
+
+<footer>
+    © 2026 Your Name | Built with GitHub Pages
+</footer>
+
+<script>
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({behavior: "smooth"});
+}
+
+function toggleTheme() {
+    if (document.body.style.background === "white") {
+        document.body.style.background = "#0f172a";
+        document.body.style.color = "white";
+    } else {
+        document.body.style.background = "white";
+        document.body.style.color = "black";
+    }
+}
+</script>
+
+</body>
+</html>
