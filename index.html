@@ -192,6 +192,35 @@
         color: #94a3b8;
         border-top: 1px solid rgba(255,255,255,0.05);
     }
+
+    /* Container for the image inside the card */
+    .card-image-container {
+        width: 100%;
+        height: 180px; /* Adjust height as needed */
+        overflow: hidden;
+        border-radius: 12px 12px 0 0; /* Rounded top corners */
+        background: #1e293b;
+    }
+    
+    .project-tile-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image fills the area without stretching */
+        transition: transform 0.5s ease;
+    }
+    
+    .card:hover .project-tile-img {
+        transform: scale(1.1); /* Zoom effect on hover */
+    }
+    
+    .card-content {
+        padding: 20px;
+    }
+    
+    .card {
+        padding: 0; /* Remove padding from card so image goes to edges */
+        overflow: hidden;
+    }
 </style>
 </head>
 
@@ -289,7 +318,7 @@ particlesJS('particles-js', {
   "retina_detect": true
 });
 
-/* GitHub repo auto-fetch with primary language tag */
+/* GitHub repo auto-fetch with Image Logic */
 fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10")
 .then(response => {
     if (!response.ok) throw new Error("GitHub API error");
@@ -297,7 +326,7 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
 })
 .then(data => {
     const container = document.getElementById("repos");
-    container.innerHTML = ""; // Clear loader
+    container.innerHTML = ""; 
     
     // Filter out forks and get top 4
     const originalRepos = data.filter(repo => !repo.fork).slice(0, 4);
@@ -308,22 +337,35 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
     }
     
     originalRepos.forEach(repo => {
-        // Handle null languages
         const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
         
+        /* IMAGE LOGIC:
+           1. We try to find an image named exactly like the repo in your folder.
+           2. 'onerror' switches it to your robot hand image if the specific one isn't found.
+        */
+        const fallbackImage = "images/robot-sign-language.jpg"; // Path to the image we just made
+        const projectImage = `images/${repo.name}.jpg`;
+
         container.innerHTML += `
             <div class="card">
-                ${langTag}
-                <h3>${repo.name}</h3>
-                <p>${repo.description || "A robotics/AI project repository."}</p>
-                <a href="${repo.html_url}" target="_blank">View Source Code →</a>
+                <div class="card-image-container">
+                    <img src="${projectImage}" 
+                         onerror="this.src='${fallbackImage}'" 
+                         alt="${repo.name}" 
+                         class="project-tile-img">
+                </div>
+                <div class="card-content">
+                    ${langTag}
+                    <h3>${repo.name}</h3>
+                    <p>${repo.description || "Robotics & AI development."}</p>
+                    <a href="${repo.html_url}" target="_blank">View Repository →</a>
+                </div>
             </div>
         `;
     });
 })
 .catch(error => {
-    document.getElementById("repos").innerHTML = "<p>Unable to load repositories. Please check my GitHub profile directly.</p>";
-    console.error(error);
+    document.getElementById("repos").innerHTML = "<p>Unable to load repositories.</p>";
 });
 </script>
 
