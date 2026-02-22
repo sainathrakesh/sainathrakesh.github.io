@@ -9,323 +9,224 @@
 
 <style>
     :root {
-        --primary-color: #38bdf8;
-        --bg-dark: #0f172a;
-        --card-bg: rgba(255, 255, 255, 0.05);
+        --primary: #38bdf8;
+        --bg: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    body {
+    body, html {
         margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100%;
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: var(--bg);
         color: white;
-        overflow-x: hidden;
-        background-color: var(--bg-dark); /* Fallback */
+        overflow: hidden; /* Prevents body scroll */
     }
 
-    /* Particle Background Container */
     #particles-js {
         position: fixed;
         width: 100%;
         height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -2;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    }
-
-    /* Engineering Grid Overlay */
-    .grid-overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
         z-index: -1;
-        background-image: 
-            linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        pointer-events: none; /* Lets clicks pass through to particles */
     }
 
-    /* Navbar */
+    /* Navigation */
     nav {
         position: fixed;
+        top: 0;
         width: 100%;
-        background: rgba(15, 23, 42, 0.8);
-        padding: 15px 0;
-        text-align: center;
-        z-index: 1000;
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    nav a {
-        color: var(--primary-color);
-        margin: 0 15px;
-        text-decoration: none;
-        font-weight: 600;
-        letter-spacing: 1px;
-        transition: color 0.3s;
-    }
-
-    nav a:hover {
-        color: #fff;
-    }
-
-    /* Sections */
-    section {
-        min-height: 100vh;
-        padding: 120px 20px 60px;
-        text-align: center;
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        align-items: center;
+        padding: 20px 0;
+        z-index: 100;
+        background: linear-gradient(to bottom, rgba(15,23,42,1), transparent);
     }
 
-    h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-        letter-spacing: -1px;
-    }
-
-    h1 span {
-        color: var(--primary-color);
-    }
-
-    p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #cbd5e1;
-        max-width: 600px;
-    }
-
-    /* Buttons */
-    .btn {
-        padding: 14px 30px;
-        background: var(--primary-color);
-        border: none;
-        color: #0f172a;
-        font-size: 1rem;
-        font-weight: bold;
+    .nav-link {
+        color: #94a3b8;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: 600;
         cursor: pointer;
-        margin-top: 25px;
-        border-radius: 8px;
-        transition: transform 0.2s, background 0.2s;
+        transition: var(--transition);
+        padding: 5px 10px;
     }
 
-    .btn:hover {
-        transform: translateY(-2px);
-        background: #7dd3fc;
+    .nav-link.active {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
     }
 
-    /* Project cards (Upgraded Glassmorphism) */
+    /* Section Control */
+    .content-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    section {
+        position: absolute;
+        width: 80%;
+        max-width: 1000px;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: var(--transition);
+        text-align: center;
+    }
+
+    section.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    /* Project Grid */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 20px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) transparent;
+    }
+
+    /* Project Card with Image */
     .card {
-        width: 100%;
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 25px;
-        border-radius: 16px;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         background: var(--card-bg);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: var(--transition);
         text-align: left;
-        transition: transform 0.3s ease, border-color 0.3s;
     }
 
     .card:hover {
         transform: translateY(-5px);
-        border-color: rgba(56, 189, 248, 0.4);
+        border-color: var(--primary);
     }
 
-    .card h3 {
-        margin-top: 0;
-        color: #fff;
+    .card-img {
+        width: 100%;
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+        background-color: #1e293b;
     }
 
-    .card a {
-        display: inline-block;
-        margin-top: 15px;
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: 600;
+    .card-content {
+        padding: 20px;
     }
 
-    /* Language Tag */
     .lang-tag {
-        display: inline-block;
-        padding: 4px 10px;
-        background: rgba(56, 189, 248, 0.1);
-        color: var(--primary-color);
-        border-radius: 20px;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--primary);
         font-weight: bold;
-        margin-bottom: 10px;
     }
 
-    /* Loading Spinner */
-    .loader {
-        border: 4px solid rgba(255,255,255,0.1);
-        border-top: 4px solid var(--primary-color);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 20px auto;
+    .btn {
+        background: var(--primary);
+        color: #0f172a;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 20px;
     }
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+    h1 { font-size: 3rem; margin-bottom: 10px; }
+    h1 span { color: var(--primary); }
 
-    /* Footer */
-    footer {
-        background: rgba(15, 23, 42, 0.9);
-        padding: 25px;
-        text-align: center;
-        backdrop-filter: blur(12px);
-        font-size: 0.9rem;
-        color: #94a3b8;
-        border-top: 1px solid rgba(255,255,255,0.05);
-    }
 </style>
 </head>
-
 <body>
 
 <div id="particles-js"></div>
-<div class="grid-overlay"></div>
 
 <nav>
-    <a href="#home" onclick="scrollToSection('home')">Home</a>
-    <a href="#about" onclick="scrollToSection('about')">About</a>
-    <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
-    <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+    <div class="nav-link active" onclick="showSection('home', this)">Home</div>
+    <div class="nav-link" onclick="showSection('about', this)">About</div>
+    <div class="nav-link" onclick="showSection('projects', this)">Projects</div>
+    <div class="nav-link" onclick="showSection('contact', this)">Contact</div>
 </nav>
 
-<section id="home">
-    <h1>Hi, I'm <span>Sainath Rakesh</span></h1>
-    <p>Robotics | AI | Autonomous Systems | Human Robot Interaction</p>
-    <button class="btn" onclick="scrollToSection('projects')">View My Work</button>
-</section>
+<div class="content-container">
+    <section id="home" class="active">
+        <h1>Sainath <span>Rakesh</span></h1>
+        <p>Master's Student | Robotics & Autonomous Systems</p>
+        <a class="btn" onclick="showSection('projects')">Explore Projects</a>
+    </section>
 
-<section id="about">
-    <h1>About Me</h1>
-    <p>
-        Master's student in Elektromobilität-ACES at Friedrich-Alexander-Universität, Germany.<br><br>
-        Passionate about robotics, computer vision, and building intelligent autonomous systems. I specialize in the intersection where advanced mechanics meets artificial intelligence.
-    </p>
-</section>
+    <section id="about">
+        <h1>About Me</h1>
+        <p>Master's student in Elektromobilität-ACES at FAU Germany. Focused on CV, SLAM, and Human-Robot Interaction.</p>
+    </section>
 
-<section id="projects">
-    <h1>Projects</h1>
-    <div id="repos" style="width: 100%; max-width: 650px;">
-        <div class="loader"></div>
-        <p>Syncing with GitHub...</p>
-    </div>
-</section>
+    <section id="projects">
+        <h1>Portfolio</h1>
+        <div id="repos" class="project-grid">
+            </div>
+    </section>
 
-<section id="contact">
-    <h1>Contact</h1>
-    <p>Let's build the future of robotics together.</p>
-    <div class="card" style="text-align: center;">
-        <p>📧 <a href="mailto:nsainathrakesh@gmail.com">nsainathrakesh@gmail.com</a></p>
-        <p>📱 +49 1736586703</p>
-    </div>
-</section>
-
-<footer>
-    © 2026 Sainath Rakesh N | Engineered with GitHub Pages
-</footer>
+    <section id="contact">
+        <h1>Get in Touch</h1>
+        <p>Email: nsainathrakesh@gmail.com</p>
+        <p>Location: Erlangen, Germany</p>
+    </section>
+</div>
 
 <script>
-/* Smooth scrolling */
-function scrollToSection(id) {
-    event.preventDefault();
-    document.getElementById(id).scrollIntoView({behavior: "smooth"});
-}
-
-/* Initialize Particles.js (Robotics Network Effect) */
-particlesJS('particles-js', {
-  "particles": {
-    "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-    "color": { "value": "#38bdf8" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.5, "random": false },
-    "size": { "value": 3, "random": true },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#38bdf8",
-      "opacity": 0.2,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 2,
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": { "enable": true, "mode": "grab" },
-      "onclick": { "enable": true, "mode": "push" },
-      "resize": true
-    },
-    "modes": {
-      "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } },
-      "push": { "particles_nb": 3 }
-    }
-  },
-  "retina_detect": true
-});
-
-/* GitHub repo auto-fetch with primary language tag */
-fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10")
-.then(response => {
-    if (!response.ok) throw new Error("GitHub API error");
-    return response.json();
-})
-.then(data => {
-    const container = document.getElementById("repos");
-    container.innerHTML = ""; // Clear loader
-    
-    // Filter out forks and get top 4
-    const originalRepos = data.filter(repo => !repo.fork).slice(0, 4);
-
-    if (originalRepos.length === 0) {
-        container.innerHTML = "<p>No public repositories found.</p>";
-        return;
-    }
-    
-    originalRepos.forEach(repo => {
-        // Handle null languages
-        const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
+    // Tab Navigation Logic
+    function showSection(id, element) {
+        // Remove active class from all sections and links
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         
-        container.innerHTML += `
-            <div class="card">
-                ${langTag}
-                <h3>${repo.name}</h3>
-                <p>${repo.description || "A robotics/AI project repository."}</p>
-                <a href="${repo.html_url}" target="_blank">View Source Code →</a>
-            </div>
-        `;
-    });
-})
-.catch(error => {
-    document.getElementById("repos").innerHTML = "<p>Unable to load repositories. Please check my GitHub profile directly.</p>";
-    console.error(error);
-});
-</script>
+        // Add active to target
+        document.getElementById(id).classList.add('active');
+        if(element) element.classList.add('active');
+    }
 
+    // Particles Config
+    particlesJS('particles-js', {
+        "particles": {
+            "number": { "value": 80 },
+            "color": { "value": "#38bdf8" },
+            "line_linked": { "enable": true, "opacity": 0.1 },
+            "move": { "speed": 1 }
+        }
+    });
+
+    // Github Fetch with Images
+    // Note: Since GitHub API doesn't have images, we use a placeholder logic.
+    // Tip: Name your repo images "repo-name.jpg" in a folder to automate this.
+    fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById("repos");
+        data.filter(r => !r.fork).slice(0, 6).forEach((repo, index) => {
+            // Using placeholder images - replace these URLs with your actual project screenshots
+            const imageUrl = `https://picsum.photos/seed/${repo.id}/400/250`; 
+            
+            container.innerHTML += `
+                <div class="card">
+                    <div class="card-img" style="background-image: url('${imageUrl}')"></div>
+                    <div class="card-content">
+                        <span class="lang-tag">${repo.language || 'Project'}</span>
+                        <h3 style="margin: 10px 0">${repo.name}</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8">${repo.description || 'Autonomous systems development.'}</p>
+                        <a href="${repo.html_url}" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 0.8rem; font-weight: bold;">VIEW REPO →</a>
+                    </div>
+                </div>
+            `;
+        });
+    });
+</script>
 </body>
 </html>
