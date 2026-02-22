@@ -52,12 +52,9 @@
     }
 
     .card {
-        background: #1e293b;
-        margin: 20px auto;
-        padding: 20px;
-        max-width: 600px;
-        border-radius: 10px;
-        transition: transform 0.3s;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .card:hover {
@@ -89,6 +86,10 @@
 
 <section id="about">
     <h1>About Me</h1>
+    <div class="skill">
+      <p>ROS2</p>
+      <div class="bar"><div class="progress" style="width:90%"></div></div>
+    </div>
     <p>
         Master's student in Elektromobilität based in Germany.
         Passionate about robotics, computer vision, and intelligent systems.
@@ -99,25 +100,30 @@
 <section id="projects">
     <h1>Projects</h1>
 
-    <div class="card">
-        <h3>Humanoid Sign Language Recognition</h3>
-        <p>Transformer-based system for real-time sign language understanding.</p>
-    </div>
+   <div id="repos"></div>
 
-    <div class="card">
-        <h3>SLAM Mapping Robot</h3>
-        <p>Autonomous LiDAR mapping robot using ROS2 and Gazebo.</p>
-    </div>
-
-    <div class="card">
-        <h3>Robotic Hand</h3>
-        <p>Human-like kinematic robotic hand simulation in ROS2.</p>
-    </div>
+    <script>
+    fetch("https://api.github.com/users/YOURUSERNAME/repos")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("repos");
+      data.slice(0,5).forEach(repo => {
+        container.innerHTML += `
+          <div class="card">
+            <h3>${repo.name}</h3>
+            <p>${repo.description || "No description"}</p>
+            <a href="${repo.html_url}" target="_blank">View Repo</a>
+          </div>
+        `;
+      });
+    });
+    </script>
 </section>
 
 <section id="contact">
     <h1>Contact</h1>
     <p>Email: nsainathrakesh@gmail.com</p>
+    <p>Phone: +49 1736586703</p>
     <button class="btn" onclick="toggleTheme()">Toggle Theme</button>
 </section>
 
