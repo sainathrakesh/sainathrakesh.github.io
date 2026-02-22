@@ -237,6 +237,78 @@
         font-size: 0.9rem;
         color: var(--primary-color);
     }
+
+    /* Timeline Container */
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px 0;
+    }
+    
+    /* The Vertical Line */
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        background: var(--primary-color);
+        top: 0;
+        bottom: 0;
+        left: 20px; /* Aligned to left for mobile-first, can be 50% for desktop */
+        margin-left: -1px;
+        opacity: 0.3;
+    }
+    
+    /* Timeline Item */
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background: transparent;
+        text-align: left;
+        margin-bottom: 30px;
+    }
+    
+    /* The Dots/Nodes */
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        left: 12px;
+        background-color: var(--bg-dark);
+        border: 2px solid var(--primary-color);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    
+    .timeline-content {
+        padding: 20px;
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .timeline-date {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .timeline-title {
+        margin: 0;
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .timeline-location {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        margin-bottom: 10px;
+    }
     
 </style>
 </head>
@@ -306,6 +378,48 @@
             <span>🎓</span> Download Transcripts
         </a>
     
+    </div>
+</section>
+
+<section id="career">
+    <h1>Career & <span>Education</span></h1>
+    
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <span class="timeline-date">April 2023 - Present</span>
+                <h3 class="timeline-title">M.Sc. Elektromobilität-ACES</h3>
+                <div class="timeline-location">Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany</div>
+                <p>Focusing on AI & Autonomous Driving, Connectivity, E-Powertrain, Sustainable Mobility & Production Technology (ACES).</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <span class="timeline-date">August 2021 - March 2023</span>
+                <h3 class="timeline-title">Software Analyst</h3>
+                <div class="timeline-location">Deloitte USI, Hyderabad</div>
+                <p>Development of C# Programs to Automate the Processes and Reduce Human Interferance.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <span class="timeline-date">Summer 2019</span>
+                <h3 class="timeline-title">Quality Intern</h3>
+                <div class="timeline-location">Ashok Leyland, Hosur</div>
+                <p>Analysis of factors affecting liner projection leading to quality issues and liner failures.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <span class="timeline-date">2017 - 2021</span>
+                <h3 class="timeline-title">B.Tech in Mechanical Engineering</h3>
+                <div class="timeline-location">National Institute of Technologu Karnataka, Surathkal</div>
+                <p>Specialized in Mechatronics and Mechanical Systems.</p>
+            </div>
+        </div>
     </div>
 </section>
 
