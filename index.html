@@ -10,19 +10,9 @@
         margin: 0;
         font-family: Arial, sans-serif;
         color: white;
-        overflow-x: hidden;
-    }
-
-    /* Parallax Background */
-    .parallax {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 120%;
         background: url('background.png') center center / cover no-repeat;
-        z-index: -2;
-        will-change: transform;
+        background-attachment: scroll; /* Normal scroll */
+        overflow-x: hidden;
     }
 
     /* Dark overlay */
@@ -108,7 +98,6 @@
 
 <body>
 
-<div class="parallax"></div>
 <div class="overlay"></div>
 
 <nav>
@@ -152,13 +141,6 @@
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({behavior: "smooth"});
 }
-
-/* Parallax scroll effect */
-window.addEventListener("scroll", function() {
-    const scrollY = window.scrollY;
-    document.querySelector(".parallax").style.transform =
-        "translateY(" + scrollY * 0.4 + "px)";
-});
 
 /* GitHub repo auto-fetch */
 fetch("https://api.github.com/users/nsainathrakesh/repos")
