@@ -321,7 +321,7 @@
 <nav>
     <a href="#home" onclick="scrollToSection('home')">Home</a>
     <a href="#about" onclick="scrollToSection('about')">About</a>
-    <a href="#contact" onclick="scrollToSection('career')">Career & Education</a>
+    <a href="#career" onclick="scrollToSection('career')">Career & Education</a>
     <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
     <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
 </nav>
@@ -568,7 +568,7 @@ fetch("https://api.github.com/users/sainathrakesh/repos?per_page=100")
         selectedRepos.forEach(repo => {
 
             const projectImage = `./images/${repo.name}.png`;
-            const fallbackImage = "./images/placeholder.png`;
+            const fallbackImage = "./images/placeholder.png";
 
             const langTag = repo.language
                 ? `<span class="lang-tag">${repo.language}</span>`
@@ -607,34 +607,6 @@ fetch("https://api.github.com/users/sainathrakesh/repos?per_page=100")
         document.getElementById("repos").innerHTML =
             "<p>Unable to load featured projects.</p>";
     });
-        
-        // 1. Define the path to your specific repo image
-        const projectImage = `./images/${repo.name}.png`; 
-        
-        // 2. Define the path to the Robotic Hand image you just created
-        const fallbackImage = `./images/placeholder.png`;
-    
-        container.innerHTML += `
-            <div class="card">
-                <div class="card-image-container">
-                    <img src="${projectImage}" 
-                         onerror="this.onerror=null; this.src='${fallbackImage}';" 
-                         alt="${repo.name}" 
-                         class="project-tile-img">
-                </div>
-                <div class="card-content">
-                    ${langTag}
-                    <h3>${repo.name}</h3>
-                    <p>${repo.description || "Robotics & AI development."}</p>
-                    <a href="${repo.html_url}" target="_blank">View Repository →</a>
-                </div>
-            </div>
-        `;
-    });
-})
-.catch(error => {
-    document.getElementById("repos").innerHTML = "<p>Unable to load repositories.</p>";
-});
 </script>
 
 </body>
