@@ -531,16 +531,25 @@ particlesJS('particles-js', {
 
 /* GitHub repo auto-fetch with Image Logic */
 fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10")
-.then(response => {
-    if (!response.ok) throw new Error("GitHub API error");
-    return response.json();
-})
-.then(data => {
-    const container = document.getElementById("repos");
-    container.innerHTML = ""; 
+    .then(response => {
+        if (!response.ok) throw new Error("GitHub API error");
+        return response.json();
+    })
+    .then(data => {
+        const container = document.getElementById("repos");
+        container.innerHTML = ""; 
+        
+        // Filter out forks and get top 4
+        const featuredRepos = [
+        "social-robot",
+        "sign-language-humanoid",
+        "robotic-hand",
+        "gcn-property-prediction"
+    ];
     
-    // Filter out forks and get top 4
-    const originalRepos = data.filter(repo => !repo.fork).slice(0, 4);
+    const originalRepos = featuredRepos
+        .map(name => data.find(repo => repo.name === name))
+        .filter(repo => repo);
 
     if (originalRepos.length === 0) {
         container.innerHTML = "<p>No public repositories found.</p>";
