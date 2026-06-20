@@ -312,38 +312,42 @@
 
     /* Update the line to the center for desktop */
     @media (min-width: 768px) {
+
         .timeline::after {
             left: 50%;
+            transform: translateX(-50%);
         }
-
+    
         .timeline-item {
-            width: 45%; /* Take up slightly less than half */
-            margin-bottom: 0;
+            width: 50%;
+            box-sizing: border-box;
+            position: relative;
         }
-
-        /* Items on the left */
+    
+        /* Left side cards */
         .timeline-item:nth-child(odd) {
             left: 0;
+            padding-right: 60px;
             text-align: right;
         }
-
-        /* Items on the right */
+    
+        /* Right side cards */
         .timeline-item:nth-child(even) {
-            left: 55%;
-            text-align: left; 
+            left: 50%;
+            padding-left: 60px;
+            text-align: left;
         }
-
-        /* Adjust dots to center */
+    
+        /* Center dots */
         .timeline-item:nth-child(odd)::after {
-            right: -59px; /* Adjust based on your padding */
+            right: -10px;
             left: auto;
         }
-
+    
         .timeline-item:nth-child(even)::after {
-            left: -49px;
+            left: -10px;
         }
     }
-
 </style>
 </head>
 
