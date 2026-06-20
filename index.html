@@ -201,22 +201,22 @@
         border-radius: 12px 12px 0 0; /* Rounded top corners */
         background: #1e293b;
     }
-    
+
     .project-tile-img {
         width: 100%;
         height: 100%;
         object-fit: cover; /* Ensures image fills the area without stretching */
         transition: transform 0.5s ease;
     }
-    
+
     .card:hover .project-tile-img {
         transform: scale(1.1); /* Zoom effect on hover */
     }
-    
+
     .card-content {
         padding: 20px;
     }
-    
+
     .card {
         padding: 0; /* Remove padding from card so image goes to edges */
         overflow: hidden;
@@ -245,7 +245,7 @@
         margin: 40px auto;
         padding: 20px 0;
     }
-    
+
     /* The Vertical Line */
     .timeline::after {
         content: '';
@@ -258,7 +258,7 @@
         margin-left: -1px;
         opacity: 0.3;
     }
-    
+
     /* Timeline Item */
     .timeline-item {
         padding: 10px 40px;
@@ -267,7 +267,7 @@
         text-align: left;
         margin-bottom: 30px;
     }
-    
+
     /* The Dots/Nodes */
     .timeline-item::after {
         content: '';
@@ -281,7 +281,7 @@
         border-radius: 50%;
         z-index: 1;
     }
-    
+
     .timeline-content {
         padding: 20px;
         background: var(--card-bg);
@@ -289,7 +289,7 @@
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    
+
     .timeline-date {
         color: var(--primary-color);
         font-weight: bold;
@@ -297,19 +297,53 @@
         display: block;
         margin-bottom: 5px;
     }
-    
+
     .timeline-title {
         margin: 0;
         color: white;
         font-size: 1.2rem;
     }
-    
+
     .timeline-location {
         font-size: 0.85rem;
         color: #94a3b8;
         margin-bottom: 10px;
     }
-    
+
+    /* Update the line to the center for desktop */
+    @media (min-width: 768px) {
+        .timeline::after {
+            left: 50%;
+        }
+
+        .timeline-item {
+            width: 45%; /* Take up slightly less than half */
+            margin-bottom: 0;
+        }
+
+        /* Items on the left */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        /* Items on the right */
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            text-align: left; 
+        }
+
+        /* Adjust dots to center */
+        .timeline-item:nth-child(odd)::after {
+            right: -59px; /* Adjust based on your padding */
+            left: auto;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -49px;
+        }
+    }
+
 </style>
 </head>
 
@@ -321,14 +355,13 @@
 <nav>
     <a href="#home" onclick="scrollToSection('home')">Home</a>
     <a href="#about" onclick="scrollToSection('about')">About</a>
-    <a href="#career" onclick="scrollToSection('career')">Career & Education</a>
+    <a href="#career" onclick="scrollToSection('career')">Career and Education</a>
     <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
     <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
 </nav>
 
 <section id="home">
     <h1>Hi, I'm <span>Sainath Rakesh</span></h1>
-    <h2>Master's Student in Electromobility-ACES, Robotics Enthusiast</h2>
     <p>Robotics | AI | Autonomous Systems | Human Robot Interaction</p>
     <button class="btn" onclick="scrollToSection('projects')">View My Work</button>
 </section>
@@ -371,21 +404,21 @@
     </div>
 
     <div class="button-group" style="display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
-    
+
         <a href="Sainath_Rakesh_Nimmagadda.pdf" download="Sainath_Rakesh_Nimmagadda" class="btn" style="text-decoration: none;">
             <span>📄</span> Download Resume
         </a>
-    
+
         <a href="Sainath_Rakesh_Transcripts.pdf" download="Sainath_Rakesh_Transcripts" class="btn" style="text-decoration: none;">
             <span>🎓</span> Download Transcripts
         </a>
-    
+
     </div>
 </section>
 
 <section id="career">
     <h1>Career & <span>Education</span></h1>
-    
+
     <div class="timeline">
         <div class="timeline-item">
             <div class="timeline-content">
@@ -404,7 +437,7 @@
                 <p>Development of C# Programs to Automate the Processes and Reduce Human Interferance.</p>
             </div>
         </div>
-        
+
         <div class="timeline-item">
             <div class="timeline-content">
                 <span class="timeline-date">Summer 2019</span>
@@ -413,7 +446,7 @@
                 <p>Analysis of factors affecting liner projection leading to quality issues and liner failures.</p>
             </div>
         </div>
-        
+
         <div class="timeline-item">
             <div class="timeline-content">
                 <span class="timeline-date">2017 - 2021</span>
@@ -448,27 +481,27 @@
                 </span>
             </span>
         </p>
-    
+
         <p style="margin-bottom: 20px; opacity: 0.9;">
             +49 173 6586703
         </p>
-    
+
         <p>
             <a href="https://www.linkedin.com/in/sainath-rakesh/" target="_blank" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem;">
                 LinkedIn Profile
             </a>
         </p>
     </div>
-    
+
     <script>
     function copyEmail() {
         const email = "nsainathrakesh@gmail.com";
         const toast = document.getElementById("copy-toast");
-    
+
         navigator.clipboard.writeText(email).then(() => {
             toast.style.visibility = "visible";
             toast.style.opacity = "1";
-    
+
             setTimeout(() => {
                 toast.style.opacity = "0";
                 toast.style.visibility = "hidden";
@@ -529,84 +562,54 @@ particlesJS('particles-js', {
   "retina_detect": true
 });
 
-/* Featured GitHub Projects */
+/* GitHub repo auto-fetch with Image Logic */
+fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10")
+.then(response => {
+    if (!response.ok) throw new Error("GitHub API error");
+    return response.json();
+})
+.then(data => {
+    const container = document.getElementById("repos");
+    container.innerHTML = ""; 
 
-const featuredRepos = [
-    "Roboken_hand",
-    "Socially-Assistive-Robot",
-    "signBotResources"
-];
+    // Filter out forks and get top 4
+    const originalRepos = data.filter(repo => !repo.fork).slice(0, 4);
 
-const projectTitles = {
-    "Roboken_hand": "20 DoF Robotic Hand",
-    "Socially-Assistive-Robot": "Socially Assistive Robot for Dementia Patients",
-    "signBotResources": "Sign Language Humanoid Robot"
-};
+    if (originalRepos.length === 0) {
+        container.innerHTML = "<p>No public repositories found.</p>";
+        return;
+    }
 
-fetch("https://api.github.com/users/sainathrakesh/repos?per_page=100")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("GitHub API error");
-        }
-        return response.json();
-    })
-    .then(repos => {
+    originalRepos.forEach(repo => {
+        const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
 
-        const container = document.getElementById("repos");
-        container.innerHTML = "";
+        // 1. Define the path to your specific repo image
+        const projectImage = `./images/${repo.name}.png`; 
 
-        const selectedRepos = featuredRepos
-            .map(name => repos.find(repo => repo.name === name))
-            .filter(Boolean);
+        // 2. Define the path to the Robotic Hand image you just created
+        const fallbackImage = `./images/placeholder.png`;
 
-        if (selectedRepos.length === 0) {
-            container.innerHTML =
-                "<p>No featured repositories found.</p>";
-            return;
-        }
-
-        selectedRepos.forEach(repo => {
-
-            const projectImage = `./images/${repo.name}.png`;
-            const fallbackImage = "./images/placeholder.png";
-
-            const langTag = repo.language
-                ? `<span class="lang-tag">${repo.language}</span>`
-                : "";
-
-            container.innerHTML += `
-                <div class="card">
-                    <div class="card-image-container">
-                        <img
-                            src="${projectImage}"
-                            onerror="this.onerror=null;this.src='${fallbackImage}';"
-                            alt="${repo.name}"
-                            class="project-tile-img">
-                    </div>
-
-                    <div class="card-content">
-                        ${langTag}
-
-                        <h3>${projectTitles[repo.name] || repo.name}</h3>
-
-                        <p>
-                            ${repo.description || "Robotics & AI Project"}
-                        </p>
-
-                        <a href="${repo.html_url}" target="_blank">
-                            View Repository →
-                        </a>
-                    </div>
+        container.innerHTML += `
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="${projectImage}" 
+                         onerror="this.onerror=null; this.src='${fallbackImage}';" 
+                         alt="${repo.name}" 
+                         class="project-tile-img">
                 </div>
-            `;
-        });
-    })
-    .catch(error => {
-        console.error(error);
-
-        document.getElementById("repos").innerHTML =
-            "<p>Unable to load featured projects.</p>";
+                <div class="card-content">
+                    ${langTag}
+                    <h3>${repo.name}</h3>
+                    <p>${repo.description || "Robotics & AI development."}</p>
+                    <a href="${repo.html_url}" target="_blank">View Repository →</a>
+                </div>
+            </div>
+        `;
     });
+})
+.catch(error => {
+    document.getElementById("repos").innerHTML = "<p>Unable to load repositories.</p>";
+});
 </script>
 
 </body>
