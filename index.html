@@ -577,7 +577,7 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
     container.innerHTML = ""; 
 
     // Filter out forks and get top 4
-    const originalRepos = data.filter(repo => !repo.fork).slice(0, 4);
+    const originalRepos = data.filter(repo => !repo.fork && !repo.name.endsWith("github.io"))
 
     if (originalRepos.length === 0) {
         container.innerHTML = "<p>No public repositories found.</p>";
