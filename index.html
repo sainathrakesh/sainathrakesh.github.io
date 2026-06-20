@@ -573,11 +573,17 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
     return response.json();
 })
 .then(data => {
-    const container = document.getElementById("repos");
-    container.innerHTML = ""; 
 
-    // Filter out forks and get top 4
-    .filter(repo => !repo.fork && !repo.name.endsWith(".io")).slice(0,4);
+    const container = document.getElementById("repos");
+    container.innerHTML = "";
+
+    // ✅ FIXED: proper filtering + variable
+    const originalRepos = data
+        .filter(repo =>
+            !repo.fork &&
+            !repo.name.endsWith(".github.io")
+        )
+        .slice(0, 4);
 
     if (originalRepos.length === 0) {
         container.innerHTML = "<p>No public repositories found.</p>";
@@ -585,20 +591,19 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
     }
 
     originalRepos.forEach(repo => {
-        const langTag = repo.language ? `<span class="lang-tag">${repo.language}</span>` : '';
+        const langTag = repo.language
+            ? `<span class="lang-tag">${repo.language}</span>`
+            : '';
 
-        // 1. Define the path to your specific repo image
-        const projectImage = `./images/${repo.name}.png`; 
-
-        // 2. Define the path to the Robotic Hand image you just created
+        const projectImage = `./images/${repo.name}.png`;
         const fallbackImage = `./images/placeholder.png`;
 
         container.innerHTML += `
             <div class="card">
                 <div class="card-image-container">
-                    <img src="${projectImage}" 
-                         onerror="this.onerror=null; this.src='${fallbackImage}';" 
-                         alt="${repo.name}" 
+                    <img src="${projectImage}"
+                         onerror="this.onerror=null; this.src='${fallbackImage}';"
+                         alt="${repo.name}"
                          class="project-tile-img">
                 </div>
                 <div class="card-content">
@@ -610,9 +615,12 @@ fetch("https://api.github.com/users/sainathrakesh/repos?sort=updated&per_page=10
             </div>
         `;
     });
+
 })
 .catch(error => {
-    document.getElementById("repos").innerHTML = "<p>Unable to load repositories.</p>";
+    console.error(error);
+    document.getElementById("repos").innerHTML =
+        "<p>Unable to load repositories.</p>";
 });
 </script>
 
